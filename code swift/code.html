@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code swift</title>
+</head>
+<body>
+    <script>
+        function moveZeroEnd(outputArray)
+        {
+            let resultArray=[];  //empty array to store non-zero char
+            let zeroArray=[];    //empty array to store zero
+            for(let i=0;i<outputArray.length;i++)
+            {
+                if(outputArray[i]==='0')  //checking for zero
+                {
+                    zeroArray.push(outputArray[i]);
+                }
+                else
+                {
+                    if((outputArray[i]==="t")&&(outputArray.slice(i,i+4)==='true'))  //check for bool value
+                    {
+                        resultArray.push(true);
+                        i=i+3;
+                    }
+                    else if((outputArray[i]==='f')&&(outputArray.slice(i,i+5)==='false'))
+                    {
+                        resultArray.push(false);
+                        i=i+4;
+                    }
+                    else
+                    {
+                        if (!isNaN(parseInt(outputArray[i])))  // check for number and convert it
+                        {
+                            resultArray.push(outputArray[i]);
+                        } 
+                        else
+                        {
+                            resultArray.push('"'+outputArray[i]+'"'); // check for char
+                        }
+                    }
+                }
+            }
+            resultArray=resultArray.concat(zeroArray); //combine two array(zero & non-zero)
+            return resultArray;
+        }
+        //input string
+        const inputString="false1012013a";
+        result=moveZeroEnd(inputString);
+        document.write("Expected Output:"+"<br>"+"["+result+"]");
+    </script>
+</body>
+</html>
